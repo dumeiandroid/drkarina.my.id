@@ -1,0 +1,700 @@
+/* General Body and Font Styling */
+body {
+    font-family: 'Inter', sans-serif;
+    color: #343a40; /* Dark grey for general text */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Custom Colors */
+:root {
+    --primary: #20c997; /* A calming teal-ish green */
+    --secondary: #6c757d; /* Bootstrap secondary grey */
+    --light: #f8f9fa; /* Bootstrap light */
+    --dark: #343a40; /* Bootstrap dark */
+    --gradient-primary: linear-gradient(to right, #20c997, #17a2b8); /* Teal to Cyan gradient */
+    --gradient-light: linear-gradient(to right, #f8f9fa, #e9ecef); /* Softer light gradient */
+    --gradient-dark: linear-gradient(to right, #343a40, #2c3135); /* Slightly softer dark gradient */
+}
+
+/* Navbar Styling */
+#mainNav {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08); /* Softer shadow */
+    background-color: #fff;
+    transition: background-color 0.2s ease;
+}
+
+#mainNav .navbar-brand {
+    color: var(--dark);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+
+#mainNav .navbar-brand .logo-navbar {
+    height: 40px; /* Adjust logo size */
+    width: auto;
+    border-radius: 50%; /* Rounded logo */
+}
+
+#mainNav .navbar-nav .nav-item .nav-link {
+    color: var(--dark);
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    transition: color 0.15s ease-in-out;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link:hover {
+    color: var(--primary);
+}
+
+/* Hero Section (Masthead) */
+.masthead {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding-top: 5rem; /* Adjust for fixed navbar */
+
+    /* Animated Gradient Background - Adjusted colors to match the sunset/sunrise image */
+    background: linear-gradient(135deg, #4A2707, #A15E0F, #8A3904, #3B1700, #AB5B2A); /* Coral, Gold, Light Salmon */
+    background-size: 400% 400%; /* Larger background size for animation effect */
+    animation: gradientAnimation 20s ease infinite alternate; /* Gradient animation with longer duration, alternating */
+    overflow: hidden; /* Ensure gradient stays within bounds */
+}
+
+/* Pseudo-element for subtle floating particles/lights */
+.masthead::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%); /* Soft light */
+    animation: subtleFloat 25s ease-in-out infinite alternate; /* Subtle floating animation */
+    pointer-events: none; /* Ensure no interaction interference */
+    z-index: 1; /* Above background, below text content */
+}
+
+/* Ensure content inside masthead is above the pseudo-element */
+.masthead > .container-fluid > .row > div {
+    position: relative;
+    z-index: 2; /* Ensure content is above the pseudo-element */
+}
+
+/* Specific styling for the split hero image container */
+.masthead-img-container {
+    height: 100%; /* Ensure it takes full height of its column */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Menghapus padding untuk membuat gambar lebih rapat ke kanan dan ke atas */
+    padding: 0; 
+    /* Menambahkan clip-path untuk bentuk diagonal seperti gambar yang diberikan */
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); /* Default for safety */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); /* Default for safety */
+}
+
+.masthead-img-container img {
+    /* Mengatur gambar agar mengisi penuh kontainer yang sudah diatur tingginya setinggi hero dan lebarnya setengah hero */
+    height: 100%; 
+    width: 100%;
+    object-fit: cover; /* Menggunakan cover agar gambar mengisi penuh tanpa terdistorsi, mungkin ada bagian yang terpotong */
+    border-radius: 0.75rem; /* Apply rounded corners to the image */
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175); /* Add shadow to the image */
+}
+
+.masthead h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6); /* Stronger text shadow */
+}
+
+.masthead p {
+    font-size: 1.25rem;
+    font-weight: 300;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+}
+
+/* General Section Styling */
+.page-section {
+    padding: 6rem 0; /* Mengurangi padding vertikal antar section */
+}
+
+.page-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--dark);
+}
+
+.page-section h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.page-section p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* Dividers */
+.divider {
+    max-width: 3.25rem;
+    border-width: 0.2rem;
+    border-color: var(--primary);
+    margin: 1.5rem auto;
+}
+
+.divider.light {
+    border-color: #fff;
+}
+
+/* Buttons */
+.btn-xl {
+    padding: 1.25rem 2.25rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    border-radius: 50rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    box-shadow: 0 4px 10px rgba(32, 201, 151, 0.3); /* Shadow reflecting new primary color */
+}
+
+.btn-primary:hover {
+    background-color: #17a2b8; /* A shade of cyan for hover */
+    border-color: #17a2b8;
+    transform: translateY(-3px); /* Slightly more pronounced lift */
+    box-shadow: 0 8px 16px rgba(32, 201, 151, 0.4);
+}
+
+.btn-light {
+    background-color: var(--light);
+    border-color: var(--light);
+    color: var(--dark);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-light:hover {
+    background-color: #e2e6ea;
+    border-color: #e2e6ea;
+    color: var(--dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Image Styling */
+.img-fluid.rounded {
+    border-radius: 0.75rem !important;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Menambahkan transisi untuk efek hover */
+}
+
+.img-fluid.rounded:hover {
+    transform: scale(1.03); /* Memperbesar sedikit gambar saat dihover */
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.25) !important; /* Memperkuat shadow saat dihover */
+}
+
+.shadow-lg {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+/* List Styling */
+.list-unstyled li {
+    margin-bottom: 0.5rem;
+}
+
+/* Card Styling */
+.card {
+    border-radius: 0.75rem !important;
+    overflow: hidden;
+}
+
+.card-img-top {
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+    height: 250px; /* Fixed height for images */
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out; /* Transisi untuk gambar di dalam card */
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.05); /* Memperbesar gambar di dalam card saat card dihover */
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+/* Team Images */
+.team-img {
+    height: 300px; /* Fixed height for team images */
+    object-fit: cover;
+    object-position: top; /* Focus on face */
+}
+
+/* Social Icons */
+.social-icons a {
+    color: var(--secondary);
+    transition: color 0.2s ease;
+}
+
+.social-icons a:hover {
+    color: var(--primary);
+}
+
+/* Embed Responsive for Video */
+.embed-responsive {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+
+.embed-responsive-16by9::before {
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+}
+
+.embed-responsive .embed-responsive-item {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Packages Section */
+.package-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.package-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+.package-card .card-header {
+    background: var(--gradient-light);
+    border-bottom: 0;
+    border-radius: 0.75rem 0.75rem 0 0 !important;
+}
+
+.package-card .card-header.bg-gradient-primary {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+.package-card .card-header.bg-gradient-dark {
+    background: var(--gradient-dark);
+    color: white;
+}
+
+.package-card .pricing-card-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.package-card .package-btn {
+    width: 100%;
+    border-radius: 50rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Form Styling */
+.form-floating .form-control {
+    border-radius: 0.5rem;
+}
+
+.form-floating > label {
+    padding: 1rem 0.75rem;
+}
+
+/* Footer Styling */
+footer {
+    background-color: var(--dark); /* Dark background */
+    color: white; /* White text for contrast */
+}
+
+footer h5 {
+    color: white; /* Ensure headings are white */
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+footer p,
+footer li {
+    color: rgba(255, 255, 255, 0.75); /* Lighter white for body text */
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+footer .logo-footer {
+    height: 50px;
+    width: auto;
+    border-radius: 50%;
+}
+
+footer .social-links a {
+    color: rgba(255, 255, 255, 0.75);
+    transition: color 0.2s ease;
+}
+
+footer .social-links a:hover {
+    color: var(--primary);
+}
+
+/* Floating WhatsApp Button */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    background-color: #128C7E;
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Floating "Coba Gratis" Button */
+.floating-coba-gratis-btn {
+    position: fixed;
+    bottom: 20px; /* Kembali ke posisi bawah */
+    left: 50%;
+    transform: translateX(-50%); /* Center the button horizontally */
+    background-color: #8B4513; /* Warna coklat */
+    color: #FFF; /* Warna teks putih */
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); /* Slightly darker shadow for contrast */
+    z-index: 999; /* Di atas konten lain, di bawah WhatsApp */
+    animation: blink-background 1s infinite alternate; /* Animasi berkedip pada background */
+    transition: all 0.3s ease;
+}
+
+.floating-coba-gratis-btn:hover {
+    background-color: #654321; /* Coklat lebih gelap saat di-hover */
+    transform: translateX(-50%) scale(1.05); /* Scale on hover */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    animation: none; /* Hentikan kedip saat di-hover */
+}
+
+
+/* Responsive Adjustments */
+@media (min-width: 992px) {
+    .masthead {
+        height: 100vh;
+    }
+    .masthead h1 {
+        /* Adjusted font size to try and fit into 2 lines for longer text */
+        font-size: 5rem; /* Reduced from 4.5rem */
+    }
+    .masthead p {
+        font-size: 1.5rem;
+    }
+    .page-section {
+        padding: 8rem 0; /* Mengembalikan padding untuk desktop agar tidak terlalu sempit */
+    }
+    /* Desktop specific ordering for hero columns */
+    .hero-left-content {
+        order: 1; /* Left content (title, description, button) on left */
+        text-align: left !important; /* Ensure text alignment is left on desktop */
+        align-items: flex-start !important; /* Align items to start for left column */
+        /* Mengurangi padding vertikal untuk memberikan lebih banyak ruang */
+        padding-top: 2rem !important; 
+        padding-bottom: 2rem !important; 
+        padding-left: 3rem !important; /* Mempertahankan padding horizontal */
+        padding-right: 3rem !important; /* Mempertahankan padding horizontal */
+    }
+    .hero-image-col {
+        order: 2; /* Image on right */
+        display: flex !important; /* Ensure image is visible on desktop */
+    }
+    /* Reset padding for desktop */
+    .hero-title-part,
+    .hero-description-button-part {
+        padding: 0;
+    }
+    /* Adjust margin for description part on desktop */
+    .hero-description-button-part {
+        margin-top: 2rem !important; /* Add some space between title and description on desktop */
+    }
+    /* Menerapkan clip-path diagonal untuk desktop */
+    .masthead-img-container {
+        -webkit-clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+        clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+    }
+    /* Menjadikan konten baris di dalam hero sejajar ke atas */
+    .masthead .row {
+        align-items: flex-start !important; /* Mengganti align-items-center Bootstrap */
+    }
+}
+
+@media (max-width: 768px) {
+    .masthead {
+        /* Adjust height for mobile hero to prevent excessive scrolling */
+        height: auto;
+        min-height: unset; /* Remove min-height constraint for mobile */
+        padding-top: 3rem; /* Reduce top padding for mobile */
+        padding-bottom: 3rem; /* Add bottom padding for mobile */
+    }
+
+    .masthead h1 {
+        font-size: 2.5rem;
+    }
+    .masthead p {
+        font-size: 1rem;
+    }
+    .page-section {
+        padding: 4rem 0; /* Mengurangi padding lebih lanjut untuk mobile */
+    }
+    .page-section h2 {
+        font-size: 2rem;
+    }
+    .page-section h3 {
+        font-size: 1.75rem;
+    }
+    .img-fluid.rounded {
+        margin-bottom: 2rem;
+    }
+    .order-lg-1, .order-lg-2 {
+        order: unset !important; /* Reset order for mobile */
+    }
+    .package-card {
+        margin-bottom: 1.5rem;
+    }
+
+    /* Mobile specific ordering for hero columns */
+    .masthead .row {
+        flex-direction: column; /* Stack columns vertically on mobile */
+    }
+
+    .hero-left-content {
+        width: 100%; /* Ensure full width on mobile */
+        padding: 2rem; /* Add padding for text content on mobile */
+        text-align: center !important; /* Center text on mobile */
+        align-items: center !important; /* Center items for mobile */
+    }
+
+    .hero-title-part {
+        order: 1; /* Title first */
+        padding-bottom: 0; /* Remove bottom padding to reduce gap with image */
+    }
+
+    .hero-image-col {
+        display: flex !important; /* Make image visible on mobile */
+        order: 2; /* Image second */
+        width: 100%; /* Ensure full width on mobile */
+        height: auto; /* Allow image height to adjust */
+        padding-top: 1rem; /* Adjust top padding for spacing from title */
+        padding-bottom: 1rem; /* Adjust bottom padding for spacing to description */
+    }
+
+    .hero-description-button-part {
+        order: 3; /* Description and button third */
+        padding-top: 0; /* Remove top padding to reduce gap with image */
+        margin-top: 1rem !important; /* Add some space between image and description on mobile */
+    }
+
+    /* Adjust floating buttons for mobile to prevent overlap */
+    .whatsapp-float {
+        right: 10px; /* Move WhatsApp button slightly to the left */
+        bottom: 80px; /* Move WhatsApp button up to avoid overlap with new button */
+    }
+
+    .floating-coba-gratis-btn {
+        bottom: 20px; /* Keep new button at the very bottom */
+        top: unset; /* Remove top positioning */
+        font-size: 0.9rem; /* Slightly smaller font for mobile */
+        padding: 10px 20px; /* Adjust padding for mobile */
+    }
+}
+
+/* ANIMASI BARU UNTUK GAMBAR */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floatAnimation {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); } /* Bergerak naik 10px */
+    100% { transform: translateY(0px); }
+}
+
+/* New keyframes for gradient animation - Re-added and adjusted colors */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 0%;
+        background-color: #FF7F50; /* Coral */
+    }
+    25% {
+        background-position: 100% 0%;
+        background-color: #FFD700; /* Gold */
+    }
+    50% {
+        background-position: 100% 100%;
+        background-color: #FFA07A; /* Light Salmon */
+    }
+    75% {
+        background-position: 0% 100%;
+        background-color: #FFD700; /* Gold */
+    }
+    100% {
+        background-position: 0% 0%;
+        background-color: #FF7F50; /* Coral */
+    }
+}
+
+/* New keyframes for subtle floating effect */
+@keyframes subtleFloat {
+    0% { transform: translate(0, 0); opacity: 0.1; }
+    50% { transform: translate(5px, 5px); opacity: 0.2; }
+    100% { transform: translate(0, 0); opacity: 0.1; }
+}
+
+/* Keyframes for blinking background effect */
+@keyframes blink-background {
+    0%, 100% { background-color: #8B4513; box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); } /* Coklat awal */
+    50% { background-color: #654321; box-shadow: 0 0 15px rgba(139, 69, 19, 0.7); } /* Coklat lebih gelap, glow coklat */
+}
+
+/* Gaya dasar untuk gambar yang akan dianimasikan */
+.img-fade-in {
+    opacity: 0; /* Awalnya sembunyikan gambar */
+    transform: translateY(20px); /* Posisikan sedikit di bawah */
+}
+
+/* Kelas yang ditambahkan JS saat gambar terlihat */
+.img-fade-in.is-visible {
+    animation: fadeInUp 1.8s forwards; /* Terapkan animasi fadeInUp */
+}
+
+/* Gaya untuk gambar yang bergerak naik turun */
+.animate-float {
+    animation: floatAnimation 3s ease-in-out infinite; /* Terapkan animasi float */
+}
+
+/* Pastikan transisi hover tetap berfungsi setelah animasi selesai */
+.img-fluid.rounded:hover {
+    transform: scale(1.03);
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.25) !important;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+/* Styling for the popup */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050; /* Higher than other elements */
+    opacity: 0; /* Start hidden */
+    visibility: hidden; /* Start hidden */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.popup-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 0.75rem;
+    position: relative;
+    max-width: 450px; /* Adjust max-width as needed */
+    width: 90%; /* Responsive width */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-20px); /* Start slightly above */
+    opacity: 0; /* Start hidden */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.popup-overlay.show .popup-content {
+    transform: translateY(0); /* Slide down to center */
+    opacity: 1;
+}
+
+.popup-content .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.popup-content .close-btn:hover {
+    color: #333;
+}
+
+/* Ensure package-card styling within popup is correct */
+.popup-content .package-card {
+    box-shadow: none !important; /* Remove extra shadow from nested card */
+    margin-bottom: 0; /* Remove margin from nested card */
+}
+
+/* Responsive adjustments for popup */
+@media (max-width: 576px) {
+    .popup-content {
+        padding: 15px;
+        width: 95%;
+    }
+    .popup-content .close-btn {
+        font-size: 1.8rem;
+        top: 5px;
+        right: 10px;
+    }
+}
