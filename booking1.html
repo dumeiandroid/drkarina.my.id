@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pesan Layanan Online – Dr. Karina M. Brahmana, Psikolog</title>
+    <meta name="description" content="Pesan layanan psikologi online bersama Dr. Karina M. Brahmana. Pilih sesi konseling, tes psikologi, atau seminar. Tim kami akan mengkonfirmasi jadwal dalam 1×24 jam.">
+    <link rel="canonical" href="https://www.drkarina.my.id/booking.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Pesan Layanan Online – Dr. Karina, Psikolog">
+    <meta property="og:description" content="Pilih layanan dan jadwalkan sesi psikologi online bersama Dr. Karina. Tim kami siap membantu.">
+    <meta property="og:url" content="https://www.drkarina.my.id/booking.html">
+    <meta property="og:image" content="https://lidan.co.id/gambar/dr-karina.jpeg">
+    <meta property="og:locale" content="id_ID">
+
+    <link rel="icon" href="https://lidan.co.id/gambar/favicon.ico" sizes="any">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2C5F6E;
+            --primary-light: #3A7A8C;
+            --primary-dark: #1B3D47;
+            --accent: #C8956C;
+            --accent-light: #E8B99A;
+            --cream: #FAF7F2;
+            --cream-dark: #F2EDE5;
+            --text-dark: #1A2B2F;
+            --text-mid: #4A6068;
+            --text-light: #7A9099;
+            --white: #FFFFFF;
+            --shadow-soft: 0 4px 24px rgba(44,95,110,0.10);
+            --shadow-card: 0 8px 40px rgba(44,95,110,0.14);
+            --radius: 16px;
+            --radius-sm: 8px;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'DM Sans', sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); color: var(--text-dark); background: var(--cream); }
+
+        /* NAVBAR */
+        .navbar-custom {
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(44,95,110,0.08);
+            padding: 14px 0;
+            position: sticky; top: 0; z-index: 1000;
+            box-shadow: var(--shadow-soft);
+        }
+        .navbar-brand-text { font-family: var(--font-display); font-size: 1.1rem; color: var(--primary-dark) !important; line-height: 1.2; text-decoration: none; }
+        .navbar-brand-text span { display: block; font-family: var(--font-body); font-size: 0.7rem; font-weight: 600; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; }
+        .nav-back { font-size: 0.86rem; color: var(--text-mid); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+        .nav-back:hover { color: var(--primary); }
+
+        /* PAGE HEADER */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            padding: 60px 0 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::after {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -5%;
+            width: 400px; height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(200,149,108,0.15) 0%, transparent 70%);
+        }
+        .page-header-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 10px; }
+        .page-header h1 { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: var(--white); line-height: 1.2; margin-bottom: 12px; }
+        .page-header p { color: rgba(255,255,255,0.75); font-size: 0.97rem; line-height: 1.7; max-width: 520px; }
+        .page-header-steps {
+            display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px;
+        }
+        .header-step {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.18);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.85);
+            display: flex; align-items: center; gap: 6px;
+        }
+        .header-step.active { background: var(--accent); border-color: var(--accent); color: white; font-weight: 600; }
+        .header-step i { font-size: 0.7rem; }
+
+        /* MAIN LAYOUT */
+        .booking-body { padding: 48px 0 80px; }
+
+        /* STEP INDICATOR */
+        .step-bar {
+            display: flex; align-items: center; margin-bottom: 40px;
+        }
+        .step-dot {
+            display: flex; flex-direction: column; align-items: center; flex: 1; position: relative;
+        }
+        .step-dot:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 16px; left: 50%; right: -50%;
+            height: 2px;
+            background: var(--cream-dark);
+        }
+        .step-dot.done:not(:last-child)::after,
+        .step-dot.active:not(:last-child)::after { background: var(--primary); }
+        .step-circle {
+            width: 32px; height: 32px; border-radius: 50%;
+            border: 2px solid var(--cream-dark);
+            background: var(--white);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.78rem; font-weight: 700; color: var(--text-light);
+            position: relative; z-index: 1;
+            transition: all 0.3s;
+        }
+        .step-dot.active .step-circle { border-color: var(--primary); background: var(--primary); color: white; }
+        .step-dot.done .step-circle { border-color: var(--primary); background: var(--primary); color: white; }
+        .step-label { font-size: 0.72rem; color: var(--text-light); margin-top: 6px; font-weight: 500; text-align: center; }
+        .step-dot.active .step-label { color: var(--primary); font-weight: 600; }
+        .step-dot.done .step-label { color: var(--primary); }
+
+        /* SERVICE CARDS */
+        .service-select-card {
+            background: var(--white);
+            border: 2px solid transparent;
+            border-radius: var(--radius);
+            padding: 24px 20px;
+            cursor: pointer;
+            transition: all 0.25s;
+            height: 100%;
+            position: relative;
+        }
+        .service-select-card:hover { border-color: rgba(44,95,110,0.3); box-shadow: var(--shadow-soft); transform: translateY(-3px); }
+        .service-select-card.selected { border-color: var(--primary); box-shadow: var(--shadow-card); }
+        .service-select-card.selected::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute; top: 14px; right: 14px;
+            color: var(--primary); font-size: 1rem;
+        }
+        .svc-icon {
+            width: 48px; height: 48px; border-radius: 12px;
+            background: var(--cream);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; color: var(--primary);
+            margin-bottom: 14px;
+            transition: background 0.25s;
+        }
+        .service-select-card.selected .svc-icon { background: rgba(44,95,110,0.1); }
+        .service-select-card h6 { font-weight: 700; font-size: 0.9rem; color: var(--primary-dark); margin-bottom: 6px; }
+        .service-select-card p { font-size: 0.8rem; color: var(--text-mid); line-height: 1.6; margin: 0; }
+        .svc-duration {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.72rem; font-weight: 600;
+            background: var(--cream);
+            color: var(--text-mid);
+            padding: 3px 10px; border-radius: 10px;
+        }
+
+        /* FORM CARD */
+        .form-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 36px 32px;
+            box-shadow: var(--shadow-soft);
+        }
+        .form-section-title {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 6px;
+        }
+        .form-section-desc {
+            font-size: 0.84rem;
+            color: var(--text-mid);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+        .form-label-custom {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        .form-control-custom {
+            border: 1.5px solid var(--cream-dark);
+            border-radius: var(--radius-sm);
+            padding: 11px 14px;
+            font-size: 0.88rem;
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            width: 100%;
+            background: var(--white);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-control-custom:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(44,95,110,0.1);
+        }
+        .form-control-custom::placeholder { color: var(--text-light); }
+        select.form-control-custom {
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%234A6068' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 14px;
+            padding-right: 36px;
+        }
+        .radio-group { display: flex; gap: 10px; flex-wrap: wrap; }
+        .radio-option {
+            flex: 1; min-width: 120px;
+            border: 1.5px solid var(--cream-dark);
+            border-radius: var(--radius-sm);
+            padding: 10px 14px;
+            cursor: pointer;
+            display: flex; align-items: center; gap: 8px;
+            font-size: 0.84rem; color: var(--text-mid);
+            transition: all 0.2s;
+            user-select: none;
+        }
+        .radio-option:hover { border-color: var(--primary-light); color: var(--primary); }
+        .radio-option.selected { border-color: var(--primary); background: rgba(44,95,110,0.05); color: var(--primary); font-weight: 600; }
+        .radio-option i { font-size: 0.85rem; color: var(--accent); }
+
+        /* SUBMIT BUTTON */
+        .btn-book {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 15px 36px;
+            border-radius: 32px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: var(--font-body);
+            display: inline-flex; align-items: center; gap: 10px;
+            width: 100%;
+            justify-content: center;
+        }
+        .btn-book:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(44,95,110,0.3); }
+        .btn-book:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+        /* SIDEBAR */
+        .sidebar-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 20px;
+        }
+        .sidebar-card h6 {
+            font-size: 0.8rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.08em;
+            color: var(--text-light); margin-bottom: 16px;
+        }
+        .psikolog-mini {
+            display: flex; align-items: center; gap: 14px;
+        }
+        .psikolog-mini img {
+            width: 52px; height: 52px; border-radius: 50%;
+            object-fit: cover; border: 2px solid var(--cream-dark);
+        }
+        .psikolog-mini-name { font-weight: 700; font-size: 0.88rem; color: var(--primary-dark); }
+        .psikolog-mini-title { font-size: 0.75rem; color: var(--text-light); margin-top: 2px; }
+        .credential-list { list-style: none; padding: 0; margin: 16px 0 0; }
+        .credential-list li {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 0.8rem; color: var(--text-mid);
+            padding: 5px 0;
+            border-bottom: 1px solid var(--cream);
+        }
+        .credential-list li:last-child { border-bottom: none; }
+        .credential-list li i { color: var(--primary); font-size: 0.7rem; width: 14px; }
+
+        .guarantee-card {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .guarantee-card h6 { color: var(--accent-light); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
+        .guarantee-item { display: flex; gap: 10px; margin-bottom: 12px; align-items: flex-start; }
+        .guarantee-item:last-child { margin-bottom: 0; }
+        .guarantee-item i { color: var(--accent-light); font-size: 0.85rem; flex-shrink: 0; margin-top: 2px; }
+        .guarantee-item span { font-size: 0.82rem; color: rgba(255,255,255,0.82); line-height: 1.55; }
+
+        .info-note {
+            background: rgba(200,149,108,0.1);
+            border: 1px solid rgba(200,149,108,0.25);
+            border-radius: var(--radius-sm);
+            padding: 14px 16px;
+            font-size: 0.8rem;
+            color: var(--text-mid);
+            line-height: 1.65;
+            display: flex; gap: 10px; align-items: flex-start;
+        }
+        .info-note i { color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+
+        /* SELECTED SERVICE SUMMARY */
+        .selected-service-box {
+            background: rgba(44,95,110,0.05);
+            border: 1.5px solid rgba(44,95,110,0.15);
+            border-radius: var(--radius-sm);
+            padding: 14px 16px;
+            margin-bottom: 24px;
+            display: none;
+        }
+        .selected-service-box.show { display: flex; align-items: center; gap: 12px; }
+        .selected-service-box .svc-name { font-weight: 700; font-size: 0.88rem; color: var(--primary-dark); }
+        .selected-service-box .svc-meta { font-size: 0.78rem; color: var(--text-mid); margin-top: 2px; }
+        .selected-service-box i { color: var(--primary); font-size: 1rem; flex-shrink: 0; }
+
+        /* PRIVACY NOTE */
+        .privacy-note { font-size: 0.75rem; color: var(--text-light); text-align: center; margin-top: 14px; line-height: 1.6; }
+        .privacy-note i { color: var(--accent); }
+
+        /* SUCCESS STATE */
+        .success-overlay {
+            display: none;
+            flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 40px 20px;
+        }
+        .success-overlay.show { display: flex; }
+        .success-icon {
+            width: 72px; height: 72px; border-radius: 50%;
+            background: rgba(44,95,110,0.1);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; color: var(--primary); margin-bottom: 20px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 767px) {
+            .form-card { padding: 24px 18px; }
+            .booking-body { padding: 32px 0 60px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar-custom">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="index.html" class="navbar-brand-text">
+                Dr. Karina M. Brahmana
+                <span>Psikolog Klinis &amp; Organisasi</span>
+            </a>
+            <a href="index.html" class="nav-back">
+                <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+    <div class="container">
+        <p class="page-header-label"><i class="fas fa-shield-halved me-2"></i>Pemesanan Aman &amp; Terproteksi</p>
+        <h1>Pesan Layanan Psikologi Online</h1>
+        <p>Pilih layanan yang Anda butuhkan. Tim Dr. Karina akan mengkonfirmasi jadwal dan detail sesi dalam 1×24 jam.</p>
+        <div class="page-header-steps">
+            <span class="header-step active"><i class="fas fa-check"></i> Pilih Layanan</span>
+            <span class="header-step"><i class="fas fa-circle" style="font-size:0.5rem"></i> Isi Data</span>
+            <span class="header-step"><i class="fas fa-circle" style="font-size:0.5rem"></i> Konfirmasi Tim</span>
+            <span class="header-step"><i class="fas fa-circle" style="font-size:0.5rem"></i> Sesi Dimulai</span>
+        </div>
+    </div>
+</div>
+
+<!-- BOOKING BODY -->
+<div class="booking-body">
+    <div class="container">
+        <div class="row g-4">
+
+            <!-- LEFT: MAIN FORM -->
+            <div class="col-lg-8">
+
+                <!-- STEP 1: Pilih Layanan -->
+                <div id="step1">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <div style="width:36px;height:36px;border-radius:50%;background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;flex-shrink:0;">1</div>
+                        <div>
+                            <div style="font-weight:700;color:var(--primary-dark);font-size:1rem;">Pilih Layanan</div>
+                            <div style="font-size:0.8rem;color:var(--text-mid);">Tentukan jenis layanan yang paling sesuai kebutuhan Anda</div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-4" id="serviceGrid">
+                        <!-- Konseling Individual -->
+                        <div class="col-md-6">
+                            <div class="service-select-card" onclick="selectService(this, 'Konseling Individual Online', '60 menit', 'fas fa-user')">
+                                <div class="svc-icon"><i class="fas fa-user"></i></div>
+                                <h6>Konseling Individual</h6>
+                                <p>Sesi personal one-on-one untuk depresi, kecemasan, trauma, stres, dan pengembangan diri.</p>
+                                <span class="svc-duration"><i class="fas fa-clock me-1"></i>60 menit · Online</span>
+                            </div>
+                        </div>
+                        <!-- Konseling Keluarga -->
+                        <div class="col-md-6">
+                            <div class="service-select-card" onclick="selectService(this, 'Konseling Keluarga Online', '75 menit', 'fas fa-users')">
+                                <div class="svc-icon"><i class="fas fa-users"></i></div>
+                                <h6>Konseling Keluarga</h6>
+                                <p>Sesi bersama keluarga untuk konflik, parenting, komunikasi, dan terapi pernikahan.</p>
+                                <span class="svc-duration"><i class="fas fa-clock me-1"></i>75 menit · Online</span>
+                            </div>
+                        </div>
+                        <!-- Konseling Karir -->
+                        <div class="col-md-6">
+                            <div class="service-select-card" onclick="selectService(this, 'Konseling Karir Online', '60 menit', 'fas fa-briefcase')">
+                                <div class="svc-icon"><i class="fas fa-briefcase"></i></div>
+                                <h6>Konseling Karir</h6>
+                                <p>Perencanaan karir, transisi pekerjaan, interview preparation, dan work-life balance.</p>
+                                <span class="svc-duration"><i class="fas fa-clock me-1"></i>60 menit · Online</span>
+                            </div>
+                        </div>
+                        <!-- Tes Minat Bakat -->
+                        <div class="col-md-6">
+                            <div class="service-select-card" onclick="selectService(this, 'Tes Minat Bakat Online', '90 menit', 'fas fa-star')">
+                                <div class="svc-icon"><i class="fas fa-star"></i></div>
+                                <h6>Tes Minat Bakat</h6>
+                                <p>Tes lengkap minat, bakat, dan kepribadian untuk siswa, mahasiswa, dan dewasa.</p>
+                                <span class="svc-duration"><i class="fas fa-clock me-1"></i>90 menit · Online</span>
+                            </div>
+                        </div>
+                        <!-- Psikotes Rekrutmen -->
+                        <div class="col-md-6">
+                            <div class="service-select-card" onclick="selectService(this, 'Psikotes Rekrutmen (Perusahaan)', '120 menit', 'fas fa-building')">
+                                <div class="svc-icon"><i class="fas fa-building"></i></div>
+                                <h6>Psikotes Rekrutmen</h6>
+                                <p>Asesmen karyawan untuk seleksi, promosi, atau evaluasi — untuk perusahaan dan organisasi.</p>
+                                <span class="svc-duration"><i class="fas fa-clock me-1"></i>Sesuai kebutuhan · Online/Onsite</span>
+                            </div>
+                        </div>
+                        <!-- Seminar / Workshop -->
+                        <div class="col-md-6">
+                            <div class="service-select-card" onclick="selectService(this, 'Seminar / Workshop Online', 'Sesuai kebutuhan', 'fas fa-chalkboard-teacher')">
+                                <div class="svc-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                                <h6>Seminar &amp; Workshop</h6>
+                                <p>Undang Dr. Karina untuk seminar kesehatan mental, parenting, atau soft skills di organisasi Anda.</p>
+                                <span class="svc-duration"><i class="fas fa-clock me-1"></i>Sesuai kebutuhan · Online/Onsite</span>
+                            </div>
+                        </div>
+                        <!-- Konsultasi Gratis -->
+                        <div class="col-12">
+                            <div class="service-select-card" onclick="selectService(this, 'Konsultasi Awal Gratis (15 menit)', '15 menit · GRATIS', 'fas fa-gift')" style="border-color: rgba(200,149,108,0.4); background: rgba(200,149,108,0.04);">
+                                <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                                    <div class="svc-icon" style="background:rgba(200,149,108,0.12);color:var(--accent);flex-shrink:0;"><i class="fas fa-gift"></i></div>
+                                    <div>
+                                        <h6 style="color:var(--accent);">Konsultasi Awal – Gratis</h6>
+                                        <p style="margin:0;">Sesi pengenalan 15 menit bersama tim Dr. Karina untuk menentukan jenis layanan yang paling sesuai. Tanpa biaya, tanpa komitmen.</p>
+                                        <span class="svc-duration" style="background:rgba(200,149,108,0.15);color:var(--accent);">15 menit · Gratis</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2: Isi Data -->
+                <div id="step2">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <div style="width:36px;height:36px;border-radius:50%;background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;flex-shrink:0;">2</div>
+                        <div>
+                            <div style="font-weight:700;color:var(--primary-dark);font-size:1rem;">Data &amp; Preferensi Jadwal</div>
+                            <div style="font-size:0.8rem;color:var(--text-mid);">Tim kami akan menghubungi Anda untuk konfirmasi detail sesi</div>
+                        </div>
+                    </div>
+
+                    <div class="form-card">
+                        <!-- Selected service display -->
+                        <div class="selected-service-box" id="selectedServiceBox">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <div class="svc-name" id="selectedServiceName">—</div>
+                                <div class="svc-meta" id="selectedServiceMeta">—</div>
+                            </div>
+                            <button onclick="clearService()" style="margin-left:auto;background:none;border:none;color:var(--text-light);cursor:pointer;font-size:0.8rem;">Ganti</button>
+                        </div>
+
+                        <form id="bookingForm" autocomplete="off">
+                            <!-- DATA PRIBADI -->
+                            <div class="form-section-title">Data Diri</div>
+                            <div class="form-section-desc">Informasi ini digunakan tim kami untuk menghubungi dan menyiapkan sesi Anda.</div>
+
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <label class="form-label-custom">Nama Lengkap <span style="color:var(--accent)">*</span></label>
+                                    <input type="text" name="nama" class="form-control-custom" placeholder="Nama sesuai identitas" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label-custom">Nomor WhatsApp <span style="color:var(--accent)">*</span></label>
+                                    <input type="tel" name="whatsapp" class="form-control-custom" placeholder="Contoh: 08123456789" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label-custom">Alamat Email</label>
+                                    <input type="email" name="email" class="form-control-custom" placeholder="email@anda.com">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label-custom">Usia</label>
+                                    <input type="number" name="usia" class="form-control-custom" placeholder="Usia Anda" min="5" max="99">
+                                </div>
+                            </div>
+
+                            <!-- PREFERENSI JADWAL -->
+                            <div class="form-section-title">Preferensi Jadwal</div>
+                            <div class="form-section-desc">Tim kami akan mencarikan slot yang sesuai dan mengkonfirmasi jadwal final kepada Anda.</div>
+
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <label class="form-label-custom">Preferensi Hari</label>
+                                    <select name="hari" class="form-control-custom">
+                                        <option value="">— Pilih hari —</option>
+                                        <option>Senin – Jumat (hari kerja)</option>
+                                        <option>Sabtu</option>
+                                        <option>Fleksibel (kapan saja tersedia)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label-custom">Preferensi Waktu</label>
+                                    <select name="waktu" class="form-control-custom">
+                                        <option value="">— Pilih waktu —</option>
+                                        <option>Pagi (08:00 – 11:00 WIB)</option>
+                                        <option>Siang (11:00 – 14:00 WIB)</option>
+                                        <option>Sore (14:00 – 17:00 WIB)</option>
+                                        <option>Fleksibel</option>
+                                    </select>
+                                </div>
+
+                                <!-- Platform -->
+                                <div class="col-12">
+                                    <label class="form-label-custom">Platform Pilihan</label>
+                                    <div class="radio-group" id="platformGroup">
+                                        <div class="radio-option" onclick="selectRadio(this, 'platformGroup')">
+                                            <i class="fab fa-google"></i> Google Meet
+                                        </div>
+                                        <div class="radio-option" onclick="selectRadio(this, 'platformGroup')">
+                                            <i class="fas fa-video"></i> Zoom
+                                        </div>
+                                        <div class="radio-option" onclick="selectRadio(this, 'platformGroup')">
+                                            <i class="fab fa-whatsapp"></i> WhatsApp Video
+                                        </div>
+                                        <div class="radio-option" onclick="selectRadio(this, 'platformGroup')">
+                                            <i class="fas fa-circle-question"></i> Bebas / Sesuai Tim
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- CATATAN -->
+                            <div class="mb-4">
+                                <label class="form-label-custom">Ceritakan singkat kebutuhan Anda <span style="font-weight:400;color:var(--text-light)">(opsional)</span></label>
+                                <textarea name="catatan" class="form-control-custom" rows="4"
+                                    placeholder="Misal: Saya ingin konseling untuk mengatasi kecemasan berlebihan yang sudah berlangsung beberapa bulan terakhir...
+Informasi ini membantu tim menyiapkan sesi yang lebih tepat sasaran."></textarea>
+                                <div style="font-size:0.74rem;color:var(--text-light);margin-top:6px;"><i class="fas fa-lock me-1"></i>Informasi ini bersifat rahasia dan hanya dilihat oleh tim Dr. Karina.</div>
+                            </div>
+
+                            <!-- HOW DID YOU FIND US -->
+                            <div class="mb-4">
+                                <label class="form-label-custom">Anda mengetahui Dr. Karina dari mana?</label>
+                                <select name="sumber" class="form-control-custom">
+                                    <option value="">— Pilih sumber —</option>
+                                    <option>Google / Pencarian Internet</option>
+                                    <option>Rekomendasi teman / keluarga</option>
+                                    <option>Media Sosial (Instagram / Facebook)</option>
+                                    <option>LinkedIn</option>
+                                    <option>Referral dari profesional lain</option>
+                                    <option>Lainnya</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn-book" id="submitBtn">
+                                <i class="fas fa-paper-plane"></i>
+                                Kirim Permintaan Pemesanan
+                            </button>
+                            <p class="privacy-note">
+                                <i class="fas fa-shield-halved"></i>
+                                Data Anda dilindungi kerahasiaannya sepenuhnya sesuai Kode Etik Psikologi Indonesia.<br>
+                                Tim kami akan menghubungi via WhatsApp dalam 1×24 jam untuk konfirmasi jadwal.
+                            </p>
+                        </form>
+
+                        <!-- SUCCESS STATE -->
+                        <div class="success-overlay" id="successOverlay">
+                            <div class="success-icon"><i class="fas fa-check"></i></div>
+                            <h4 style="font-family:var(--font-display);color:var(--primary-dark);margin-bottom:10px;">Permintaan Terkirim!</h4>
+                            <p style="color:var(--text-mid);font-size:0.9rem;line-height:1.7;max-width:360px;">
+                                Tim Dr. Karina telah menerima permintaan Anda dan akan menghubungi via WhatsApp dalam <strong>1×24 jam</strong> untuk mengkonfirmasi jadwal sesi.
+                            </p>
+                            <div style="margin-top:24px;padding:16px 20px;background:var(--cream);border-radius:12px;font-size:0.85rem;color:var(--text-mid);max-width:360px;">
+                                <i class="fab fa-whatsapp me-2" style="color:#25D366"></i>
+                                Ingin langsung terhubung? Chat tim kami di WhatsApp sekarang.
+                            </div>
+                            <a href="https://wa.me/6285159601400?text=Halo%20Tim%20Dr.%20Karina,%20saya%20baru%20saja%20mengisi%20formulir%20pemesanan%20layanan."
+                               style="margin-top:16px;background:#25D366;color:white;text-decoration:none;padding:12px 28px;border-radius:32px;font-weight:700;font-size:0.88rem;display:inline-flex;align-items:center;gap:8px;"
+                               target="_blank">
+                                <i class="fab fa-whatsapp"></i> Hubungi Tim via WhatsApp
+                            </a>
+                            <a href="index.html" style="margin-top:12px;color:var(--text-mid);font-size:0.84rem;text-decoration:none;">
+                                ← Kembali ke Beranda
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: SIDEBAR -->
+            <div class="col-lg-4">
+
+                <!-- Psikolog Info -->
+                <div class="sidebar-card">
+                    <h6>Psikolog Anda</h6>
+                    <div class="psikolog-mini">
+                        <img src="https://lidan.co.id/gambar/dr-karina.jpeg" alt="Dr. Karina M. Brahmana">
+                        <div>
+                            <div class="psikolog-mini-name">Dr. Karina M. Brahmana</div>
+                            <div class="psikolog-mini-title">M.Psi, Psikolog · S3 Unair</div>
+                        </div>
+                    </div>
+                    <ul class="credential-list">
+                        <li><i class="fas fa-graduation-cap"></i> S3 Psikologi – Universitas Airlangga</li>
+                        <li><i class="fas fa-graduation-cap"></i> S2 Profesi IO – Universitas Indonesia</li>
+                        <li><i class="fas fa-certificate"></i> Psikolog Berlisensi HIMPSI</li>
+                        <li><i class="fas fa-chalkboard"></i> Dosen Aktif di Medan</li>
+                        <li><i class="fas fa-users"></i> 1000+ Klien Terlayani</li>
+                        <li><i class="fas fa-clock"></i> 15+ Tahun Pengalaman</li>
+                    </ul>
+                </div>
+
+                <!-- Guarantee -->
+                <div class="guarantee-card">
+                    <h6><i class="fas fa-shield-halved me-2"></i>Yang Anda Dapatkan</h6>
+                    <div class="guarantee-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Konfirmasi jadwal dalam 1×24 jam oleh tim kami</span>
+                    </div>
+                    <div class="guarantee-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Sesi langsung bersama Dr. Karina, bukan asisten</span>
+                    </div>
+                    <div class="guarantee-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Privasi dan kerahasiaan data dijamin penuh</span>
+                    </div>
+                    <div class="guarantee-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Laporan dan rekomendasi setelah setiap sesi</span>
+                    </div>
+                    <div class="guarantee-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Akses dari mana saja — cukup koneksi internet</span>
+                    </div>
+                </div>
+
+                <!-- Info Note -->
+                <div class="info-note">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Formulir ini <strong>bukan</strong> sesi konseling darurat. Jika Anda dalam kondisi krisis psikologis, segera hubungi <strong>Into The Light Indonesia: 119 ext 8</strong> atau pergi ke fasilitas kesehatan terdekat.</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER MINI -->
+<footer style="background:#0F2229;padding:28px 0;text-align:center;">
+    <p style="color:rgba(255,255,255,0.35);font-size:0.8rem;margin:0;">
+        &copy; 2025 Dr. Karina M. Brahmana, M.Psi, Psikolog ·
+        <a href="index.html" style="color:rgba(255,255,255,0.45);text-decoration:none;">drkarina.my.id</a>
+    </p>
+</footer>
+
+<!-- FLOATING WA -->
+<div style="position:fixed;bottom:24px;right:24px;z-index:999;">
+    <a href="https://wa.me/6285159601400?text=Halo%20Tim%20Dr.%20Karina,%20saya%20ingin%20tanya%20tentang%20pemesanan%20layanan."
+       target="_blank"
+       style="width:54px;height:54px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:1.4rem;box-shadow:0 4px 20px rgba(37,211,102,0.45);text-decoration:none;"
+       aria-label="Chat Tim Dr. Karina via WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    let selectedService = null;
+
+    function selectService(el, name, duration, icon) {
+        // Remove selected from all
+        document.querySelectorAll('.service-select-card').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedService = { name, duration, icon };
+
+        // Update summary box
+        document.getElementById('selectedServiceName').textContent = name;
+        document.getElementById('selectedServiceMeta').textContent = duration;
+        document.getElementById('selectedServiceBox').classList.add('show');
+
+        // Smooth scroll to form
+        setTimeout(() => {
+            document.getElementById('step2').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 200);
+    }
+
+    function clearService() {
+        document.querySelectorAll('.service-select-card').forEach(c => c.classList.remove('selected'));
+        selectedService = null;
+        document.getElementById('selectedServiceBox').classList.remove('show');
+        document.getElementById('step1').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function selectRadio(el, groupId) {
+        document.querySelectorAll(`#${groupId} .radio-option`).forEach(o => o.classList.remove('selected'));
+        el.classList.add('selected');
+    }
+
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const nama = this.nama.value;
+        const wa = this.whatsapp.value;
+        const layanan = selectedService ? selectedService.name : this.querySelector('select')?.value || 'Layanan psikologi';
+        const catatan = this.catatan.value;
+        const hari = this.hari.value;
+        const waktu = this.waktu.value;
+        const platform = document.querySelector('#platformGroup .radio-option.selected')?.textContent?.trim() || '';
+
+        const text = `Halo Tim Dr. Karina,\n\nSaya *${nama}* ingin memesan:\n*Layanan:* ${layanan}\n*No. WA:* ${wa}${hari ? '\n*Preferensi Hari:* ' + hari : ''}${waktu ? '\n*Preferensi Waktu:* ' + waktu : ''}${platform ? '\n*Platform:* ' + platform : ''}${catatan ? '\n\n*Catatan:* ' + catatan : ''}\n\nMohon konfirmasi jadwal. Terima kasih.`;
+
+        window.open('https://wa.me/6285159601400?text=' + encodeURIComponent(text), '_blank');
+
+        // Show success state
+        document.getElementById('bookingForm').style.display = 'none';
+        document.getElementById('successOverlay').classList.add('show');
+    });
+</script>
+</body>
+</html>
