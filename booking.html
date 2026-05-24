@@ -591,14 +591,9 @@
             <div class="d-flex align-items-center gap-3 mb-4">
                 <div style="width:36px;height:36px;border-radius:50%;background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;flex-shrink:0;">1</div>
                 <div>
-                    <div style="font-weight:700;color:var(--primary-dark);font-size:1rem;">Pilih Kategori &amp; Paket Layanan</div>
-                    <div style="font-size:0.8rem;color:var(--text-mid);">Pilih kategori, lalu klik tombol daftar pada paket yang sesuai</div>
+                    <div style="font-weight:700;color:var(--primary-dark);font-size:1rem;">Pilih Paket Layanan</div>
+                    <div style="font-size:0.8rem;color:var(--text-mid);">Pilih paket yang sesuai, lalu klik tombol daftar untuk melanjutkan</div>
                 </div>
-            </div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;" id="categoryTabs">
-                <button class="cat-tab active" onclick="switchCategory('iq')" id="tab-iq"><i class="fas fa-brain me-2"></i>Tes IQ</button>
-                <button class="cat-tab" onclick="switchCategory('personal')" id="tab-personal"><i class="fas fa-user me-2"></i>Konseling Personal</button>
-                <button class="cat-tab" onclick="switchCategory('pasangan')" id="tab-pasangan"><i class="fas fa-heart me-2"></i>Konseling Pasangan</button>
             </div>
             <div id="paketGrid"></div>
         </div>
@@ -915,60 +910,64 @@ const fmt = n => 'Rp ' + n.toLocaleString('id-ID');
 
 let _paket = {};
 
-/* ════════ Render paket cards ════════ */
-function renderPakets(cat) {
-  const data = PAKET_DATA[cat];
+/* ════════ Render semua kategori berurutan ke bawah ════════ */
+function renderAllPakets() {
   const grid = $('paketGrid');
-  const cols = data.pakets.length === 1 ? 'col-md-6 mx-auto' : (data.pakets.length === 2 ? 'col-md-6' : 'col-md-4');
+  let html = '';
 
-  let html = `<p style="font-size:13.5px;color:var(--text-mid);margin-bottom:20px;line-height:1.6;">${data.desc}</p>`;
-  html += '<div class="row g-3">';
+  Object.entries(PAKET_DATA).forEach(([cat, data]) => {
+    const cols = data.pakets.length === 1 ? 'col-md-6 mx-auto' : (data.pakets.length === 2 ? 'col-md-6' : 'col-md-4');
 
-  data.pakets.forEach(p => {
-    const featClass = p.featured ? 'featured' : '';
-    const popularTag = p.popularTag ? `<div class="popular-tag">${p.popularTag}</div>` : '';
-    const fiturHTML = p.fitur.map(f =>
-      `<li><span class="chk ${f.star ? 'chk-star' : 'chk-yes'}"><i class="fas ${f.star ? 'fa-star' : 'fa-check'}" style="font-size:8px;"></i></span>${f.label}</li>`
-    ).join('');
-    const noteStyle = `background:${p.note.bg};border-radius:8px;padding:10px 12px;`;
+    // Header kategori
+    html += `<div style="margin-bottom:16px;margin-top:36px;">
+      <p style="font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;">${data.title}</p>
+      <p style="font-size:13.5px;color:var(--text-mid);line-height:1.6;margin-bottom:20px;">${data.desc}</p>
+    </div>`;
+    html += '<div class="row g-3" style="margin-bottom:8px;">';
 
-    html += `
-      <div class="${cols}">
-        <div class="paket-card ${p.scheme} ${featClass} h-100">
-          ${popularTag}
-          <div class="paket-header">
-            <div class="paket-name-tag">${p.kode}</div>
-            <div class="paket-title">${p.nama}</div>
-            <div class="paket-price">${fmt(p.harga)}</div>
-            <div class="paket-price-sub">per ${cat === 'pasangan' ? 'paket' : cat === 'personal' && p.id === 'personal-3x' ? 'paket 3 sesi' : 'sesi/laporan'}</div>
+    data.pakets.forEach(p => {
+      const featClass = p.featured ? 'featured' : '';
+      const popularTag = p.popularTag ? `<div class="popular-tag">${p.popularTag}</div>` : '';
+      const fiturHTML = p.fitur.map(f =>
+        `<li><span class="chk ${f.star ? 'chk-star' : 'chk-yes'}"><i class="fas ${f.star ? 'fa-star' : 'fa-check'}" style="font-size:8px;"></i></span>${f.label}</li>`
+      ).join('');
+      const noteStyle = `background:${p.note.bg};border-radius:8px;padding:10px 12px;`;
+
+      html += `
+        <div class="${cols}">
+          <div class="paket-card ${p.scheme} ${featClass} h-100">
+            ${popularTag}
+            <div class="paket-header">
+              <div class="paket-name-tag">${p.kode}</div>
+              <div class="paket-title">${p.nama}</div>
+              <div class="paket-price">${fmt(p.harga)}</div>
+              <div class="paket-price-sub">per ${cat === 'pasangan' ? 'paket' : cat === 'personal' && p.id === 'personal-3x' ? 'paket 3 sesi' : 'sesi/laporan'}</div>
+            </div>
+            <div class="paket-body">
+              <ul class="paket-feature-list">${fiturHTML}</ul>
+              <p class="paket-note" style="${noteStyle}">${p.note.icon} ${p.note.text}</p>
+            </div>
+            <div class="paket-footer">
+              <button class="btn-paket" onclick="openCheckout('${p.id}','${p.kode}','${p.nama}',${p.harga})">
+                <i class="fas fa-calendar-check"></i> Daftar ${p.kode}
+              </button>
+              <p style="font-size:11px;color:var(--text-light);text-align:center;margin-top:8px;margin-bottom:0;">
+                <a href="#" onclick="openSK();return false;" style="color:var(--text-light);">Syarat &amp; Ketentuan</a> ·
+                <a href="#" onclick="openRefund();return false;" style="color:var(--text-light);">Kebijakan Refund</a>
+              </p>
+            </div>
           </div>
-          <div class="paket-body">
-            <ul class="paket-feature-list">${fiturHTML}</ul>
-            <p class="paket-note" style="${noteStyle}">${p.note.icon} ${p.note.text}</p>
-          </div>
-          <div class="paket-footer">
-            <button class="btn-paket" onclick="openCheckout('${p.id}','${p.kode}','${p.nama}',${p.harga})">
-              <i class="fas fa-calendar-check"></i> Daftar ${p.kode}
-            </button>
-            <p style="font-size:11px;color:var(--text-light);text-align:center;margin-top:8px;margin-bottom:0;">
-              <a href="#" onclick="openSK();return false;" style="color:var(--text-light);">Syarat &amp; Ketentuan</a> ·
-              <a href="#" onclick="openRefund();return false;" style="color:var(--text-light);">Kebijakan Refund</a>
-            </p>
-          </div>
-        </div>
-      </div>`;
+        </div>`;
+    });
+
+    html += '</div>';
   });
 
-  html += '</div>';
   grid.innerHTML = html;
 }
 
-/* ════════ Switch category ════════ */
-function switchCategory(cat) {
-  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
-  $('tab-' + cat).classList.add('active');
-  renderPakets(cat);
-}
+/* ════════ Switch category (tidak dipakai, tapi dipertahankan agar tidak error) ════════ */
+function switchCategory(cat) { /* no-op */ }
 
 /* ════════ Modal helpers ════════ */
 function lockScroll() { document.body.style.overflow = 'hidden'; }
@@ -1101,7 +1100,7 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
 });
 
 /* ════════ Init ════════ */
-switchCategory('iq');
+renderAllPakets();
 </script>
 </body>
 </html>
