@@ -627,7 +627,7 @@
 
 <!-- FLOATING WA -->
 <div style="position:fixed;bottom:24px;right:24px;z-index:999;">
-    <a href="https://wa.me/6285159601400?text=Halo%20Tim%20Dr.%20Karina,%20saya%20ingin%20tanya%20tentang%20pemesanan%20layanan."
+    <a href="https://wa.me/6285174425854?text=Halo%20Tim%20Dr.%20Karina,%20saya%20ingin%20tanya%20tentang%20pemesanan%20layanan."
        target="_blank"
        style="width:54px;height:54px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:1.4rem;box-shadow:0 4px 20px rgba(37,211,102,0.45);text-decoration:none;"
        aria-label="Chat Tim Dr. Karina via WhatsApp">
@@ -671,7 +671,7 @@
       <p class="modal-sk-h">7. Perubahan Syarat</p>
       <p>Dr. Karina M. Brahmana berhak memperbarui syarat dan ketentuan ini sewaktu-waktu. Perubahan akan diinformasikan melalui website atau WhatsApp kepada klien yang terdaftar.</p>
       <div style="margin-top:16px;padding:12px 14px;background:rgba(44,95,110,.06);border-radius:8px;border:1px solid rgba(44,95,110,.15);">
-        <p style="margin:0;font-size:12.5px;color:var(--primary-dark);"><strong>Pertanyaan?</strong> Hubungi tim kami di <a href="https://wa.me/6285159601400" style="color:var(--primary);">WhatsApp +62 851-5960-1400</a>.</p>
+        <p style="margin:0;font-size:12.5px;color:var(--primary-dark);"><strong>Pertanyaan?</strong> Hubungi tim kami di <a href="https://wa.me/6285174425854" style="color:var(--primary);">WhatsApp +62 851-7442-5854</a>.</p>
       </div>
     </div>
     <div class="modal-footer"><button onclick="closeSK()" style="background:var(--primary);color:white;border:none;padding:10px 28px;border-radius:8px;font-size:13.5px;font-weight:700;cursor:pointer;">Saya Mengerti</button></div>
@@ -705,7 +705,7 @@
         <li>Ketidakpuasan terhadap hasil tes (hasil bersifat objektif sesuai jawaban peserta).</li>
       </ul>
       <p class="modal-sk-h">Proses Pengajuan Refund</p>
-      <p>Ajukan permintaan refund melalui WhatsApp ke <a href="https://wa.me/6285159601400" style="color:var(--primary);">+62 851-5960-1400</a> dengan menyertakan: nama lengkap, layanan yang dipesan, dan alasan pembatalan. Verifikasi dilakukan dalam 3 hari kerja. Dana dikembalikan dalam 5–7 hari kerja setelah verifikasi disetujui.</p>
+      <p>Ajukan permintaan refund melalui WhatsApp ke <a href="https://wa.me/6285174425854" style="color:var(--primary);">+62 851-5960-1400</a> dengan menyertakan: nama lengkap, layanan yang dipesan, dan alasan pembatalan. Verifikasi dilakukan dalam 3 hari kerja. Dana dikembalikan dalam 5–7 hari kerja setelah verifikasi disetujui.</p>
     </div>
     <div class="modal-footer"><button onclick="closeRefund()" style="background:var(--primary);color:white;border:none;padding:10px 28px;border-radius:8px;font-size:13.5px;font-weight:700;cursor:pointer;">Saya Mengerti</button></div>
   </div>
@@ -1045,7 +1045,7 @@ window.submitCheckout = function() {
   const catatan = $('co-catatan').value.trim();
 
   const text = `Halo Tim Dr. Karina,\n\nSaya *${nama}* ingin mendaftar:\n*Layanan:* ${_paket.kode} — ${_paket.nama}\n*Nominal:* ${fmt(_paket.harga)}\n*No. WA:* ${wa}${email ? '\n*Email:* ' + email : ''}${tanggal ? '\n*Preferensi Tgl:* ' + tanggal : ''}${jam ? '\n*Preferensi Jam:* ' + jam : ''}${catatan ? '\n\n*Catatan:* ' + catatan : ''}\n\nMohon konfirmasi jadwal dan instruksi pembayaran. Terima kasih.`;
-  $('co-wa-link').href = 'https://wa.me/6285159601400?text=' + encodeURIComponent(text);
+  $('co-wa-link').href = 'https://wa.me/6285174425854?text=' + encodeURIComponent(text);
 
   $('co-form-wrap').style.display = 'none';
   $('co-success-wrap').style.display = 'block';
@@ -1094,7 +1094,7 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
   const waktu = this.waktu.value;
   const platform = document.querySelector('#platformGroup .radio-option.selected')?.textContent?.trim() || '';
   const text = `Halo Tim Dr. Karina,\n\nSaya *${nama}* ingin memesan:\n*Layanan:* ${layanan}\n*No. WA:* ${wa}${hari ? '\n*Preferensi Hari:* ' + hari : ''}${waktu ? '\n*Preferensi Waktu:* ' + waktu : ''}${platform ? '\n*Platform:* ' + platform : ''}${catatan ? '\n\n*Catatan:* ' + catatan : ''}\n\nMohon konfirmasi jadwal. Terima kasih.`;
-  window.open('https://wa.me/6285159601400?text=' + encodeURIComponent(text), '_blank');
+  window.open('https://wa.me/6285174425854?text=' + encodeURIComponent(text), '_blank');
   document.getElementById('bookingForm').style.display = 'none';
   document.getElementById('successOverlay').classList.add('show');
 });
